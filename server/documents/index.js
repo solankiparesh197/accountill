@@ -4,7 +4,6 @@ export default function (
   {
     id, name, address, organisation, gstNo, email, dueDate, date, subTotal, vat, total, items, rates, currency
   }) {
-  const today = new Date();
   const renderTR = () => {
     let html = '';
     for(let i=0; i<10; i++){

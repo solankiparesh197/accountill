@@ -375,7 +375,6 @@ const Invoice = () => {
                 <TableCell>Item</TableCell>
                 <TableCell >Qty</TableCell>
                 <TableCell>Price</TableCell>
-                <TableCell >Disc(%)</TableCell>
                 <TableCell >Amount</TableCell>
                 <TableCell >Action</TableCell>
             </TableRow>
@@ -386,7 +385,6 @@ const Invoice = () => {
                 <TableCell  scope="row" style={{width: '40%' }}> <InputBase style={{width: '100%'}} outline="none" sx={{ ml: 1, flex: 1 }} type="text" name="itemName" onChange={e => handleChange(index, e)} value={itemField.itemName} placeholder="Item name or description" /> </TableCell>
                 <TableCell align="right"> <InputBase sx={{ ml: 1, flex: 1 }} type="number" name="quantity" onChange={e => handleChange(index, e)} value={itemField.quantity} placeholder="0" /> </TableCell>
                 <TableCell align="right"> <InputBase sx={{ ml: 1, flex: 1 }} type="number" name="unitPrice" onChange={e => handleChange(index, e)} value={itemField.unitPrice} placeholder="0" /> </TableCell>
-                <TableCell align="right"> <InputBase sx={{ ml: 1, flex: 1 }} type="number" name="discount"  onChange={e => handleChange(index, e)} value={itemField.discount} placeholder="0" /> </TableCell>
                 <TableCell align="right"> <InputBase sx={{ ml: 1, flex: 1 }} type="number" name="amount" onChange={e => handleChange(index, e)}  value={(itemField.quantity * itemField.unitPrice) - (itemField.quantity * itemField.unitPrice) * itemField.discount / 100} disabled /> </TableCell>
                 <TableCell align="right"> 
                     <IconButton onClick={() =>handleRemoveField(index)}>
@@ -411,7 +409,7 @@ const Invoice = () => {
                 <h4>{subTotal}</h4>
             </div>
             <div className={styles.summaryItem}>
-                <p>VAT(%):</p>
+                <p>GST(%):</p>
                 <h4>{vat}</h4>
             </div>
             <div className={styles.summaryItem}>

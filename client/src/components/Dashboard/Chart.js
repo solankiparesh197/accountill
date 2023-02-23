@@ -1,5 +1,6 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
+import moment from "moment";
 
 function Chart({ paymentHistory }) {
 
@@ -7,8 +8,8 @@ function Chart({ paymentHistory }) {
     let paymentDates = []
     for(let i = 0; i < paymentHistory.length; i++) {
       const newDate = new Date(paymentHistory[i].datePaid);
-      let localDate = newDate.toLocaleDateString();
-            paymentDates = [...paymentDates, localDate]
+      let localDate = moment(newDate).format('YYYY-MM-DD');
+      paymentDates = [...paymentDates, localDate]
     }
 
 

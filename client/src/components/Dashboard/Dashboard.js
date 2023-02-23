@@ -19,8 +19,10 @@ const Dashboard = () => {
     const dispatch = useDispatch()
     const user = JSON.parse(localStorage.getItem('profile'))
     const { invoices, isLoading } = useSelector((state) => state?.invoices)
+  console.log('invoices:: ',invoices)
     // const unpaid = invoices?.filter((invoice) => (invoice.status === 'Unpaid') || (invoice.status === 'Partial'))
-    const overDue = invoices?.filter((invoice) => invoice.dueDate <= new Date().toISOString())
+    // const overDue = invoices?.filter((invoice) => new Date(invoice.dueDate) <= new Date().toISOString())
+    const overDue = []
 
 
     let paymentHistory = []
@@ -206,7 +208,7 @@ const Dashboard = () => {
                             <tr  className={styles.tableRow} key={record._id}>
                                 <td><button>{record?.paidBy?.charAt(0)}</button></td>
                                 <td>{record.paidBy}</td>
-                                <td>{moment(record.datePaid).format('MMMM Do YYYY')}</td>
+                                <td>{record.datePaid}</td>
                                 <td><h3 style={{color: '#00A86B', fontSize: '14px'}} >{toCommas(record.amountPaid)}</h3></td>
                                 <td>{record.paymentMethod}</td>
                                 <td>{record.note}</td>

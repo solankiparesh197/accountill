@@ -127,15 +127,19 @@ const InvoiceDetails = () => {
       date: invoice.createdAt,
       id: invoice.invoiceNumber,
       notes: invoice.notes,
-      subTotal: toCommas(invoice.subTotal),
-      total: toCommas(invoice.total),
+      subTotal: toCommas(invoice.subTotal.toFixed(2)),
+      total: toCommas(invoice.total.toFixed(2)),
       type: invoice.type,
-      vat: invoice.vat,
+      vat: toCommas(invoice.vat.toFixed(2)),
       items: invoice.items,
       status: invoice.status,
       totalAmountReceived: toCommas(totalAmountReceived),
       balanceDue: toCommas(total - totalAmountReceived),
       company: company,
+      organisation: invoice.client.organisation,
+      gstNo: invoice.client.gstNo,
+      rates: invoice.rates,
+      currency: invoice.currency
   })
       .then(() => axios.get(`${process.env.REACT_APP_API}/fetch-pdf`, { responseType: 'blob' }))
       .then((res) => {
@@ -311,7 +315,6 @@ if(!invoice) {
             <TableCell>Item</TableCell>
             <TableCell >Qty</TableCell>
             <TableCell>Price</TableCell>
-            <TableCell >Disc(%)</TableCell>
             <TableCell >Amount</TableCell>
            
           </TableRow>
@@ -322,7 +325,6 @@ if(!invoice) {
               <TableCell  scope="row" style={{width: '40%' }}> <InputBase style={{width: '100%'}} outline="none" sx={{ ml: 1, flex: 1 }} type="text" name="itemName" value={itemField.itemName} placeholder="Item name or description" readOnly /> </TableCell>
               <TableCell align="right"> <InputBase sx={{ ml: 1, flex: 1 }} type="number" name="quantity" value={itemField?.quantity} placeholder="0" readOnly /> </TableCell>
               <TableCell align="right"> <InputBase sx={{ ml: 1, flex: 1 }} type="number" name="unitPrice" value={itemField?.unitPrice} placeholder="0" readOnly /> </TableCell>
-              <TableCell align="right"> <InputBase sx={{ ml: 1, flex: 1 }} type="number" name="discount"  value={itemField?.discount} readOnly /> </TableCell>
               <TableCell align="right"> <InputBase sx={{ ml: 1, flex: 1 }} type="number" name="amount"  value={(itemField?.quantity * itemField.unitPrice) - (itemField.quantity * itemField.unitPrice) * itemField.discount / 100} readOnly /> </TableCell>
               
               
@@ -342,7 +344,7 @@ if(!invoice) {
                         <h4>{subTotal}</h4>
                     </div>
                     <div className={styles.summaryItem}>
-                        <p>{`VAT(${rates}%):`}</p>
+                        <p>{`GST(${rates}%):`}</p>
                         <h4>{vat}</h4>
                     </div>
                     <div className={styles.summaryItem}>

@@ -151,9 +151,11 @@ const headerStyle = { borderBottom: 'none', textAlign: 'center'}
       <TableHead>
           <TableRow>
             <TableCell style={{...headerStyle, width: '10px'}}>Number</TableCell>
+            <TableCell style={headerStyle}>Organisation</TableCell>
             <TableCell style={headerStyle}>Name</TableCell>
             <TableCell style={headerStyle}>Email</TableCell>
             <TableCell style={headerStyle}>Phone</TableCell>
+            <TableCell style={headerStyle}>GST No.</TableCell>
             <TableCell style={headerStyle}>Edit</TableCell>
             <TableCell style={headerStyle}>Delete</TableCell>
             
@@ -167,9 +169,11 @@ const headerStyle = { borderBottom: 'none', textAlign: 'center'}
           ).map((row, index) => (
             <TableRow key={row._id} styel={{cursor: 'pointer'}} >
               <TableCell style={{...tableStyle, width: '10px'}}>{index + 1}</TableCell>
+              <TableCell  style={tableStyle} scope="row" > <Button style={{textTransform: 'none'}}  > {row.organisation} </Button></TableCell>
               <TableCell  style={tableStyle} scope="row" > <Button style={{textTransform: 'none'}}  > {row.name} </Button></TableCell>
               <TableCell style={tableStyle}>{row.email}</TableCell>
               <TableCell style={tableStyle}>{row.phone}</TableCell>
+              <TableCell style={tableStyle}>{row.gstNo}</TableCell>
               <TableCell style={{...tableStyle, width: '10px'}}>
                   <IconButton onClick={() => handleEdit(row._id)}>
                     <BorderColorIcon style={{width: '20px', height: '20px'}} />
@@ -185,7 +189,7 @@ const headerStyle = { borderBottom: 'none', textAlign: 'center'}
 
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
-              <TableCell colSpan={6} />
+              <TableCell colSpan={8} />
             </TableRow>
           )}
         </TableBody>
@@ -193,7 +197,7 @@ const headerStyle = { borderBottom: 'none', textAlign: 'center'}
           <TableRow>
             <TablePagination
               rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-              colSpan={6}
+              colSpan={8}
               count={rows.length}
               rowsPerPage={rowsPerPage}
               page={page}

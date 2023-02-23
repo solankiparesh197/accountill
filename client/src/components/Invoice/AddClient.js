@@ -61,12 +61,11 @@ const DialogActions = withStyles((theme) => ({
 const AddClient = ({ setOpen, open }) => {
 
     const location = useLocation()
-    const [clientData, setClientData] = useState({ name: '', email: '', phone: '', address: '', userId: [] })
+    const [clientData, setClientData] = useState({ organisation: '', name: '', email: '', phone: '', gstNo: '', address: '', userId: [] })
     const dispatch = useDispatch()
     const user = JSON.parse(localStorage.getItem('profile'))
        // eslint-disable-next-line 
-       const [openSnackbar, closeSnackbar] = useSnackbar()
-
+     const [openSnackbar, closeSnackbar] = useSnackbar()
 
     useEffect(() => {
       var checkId = user?.result?._id
@@ -87,7 +86,7 @@ const AddClient = ({ setOpen, open }) => {
     }
 
   const clear =() => {
-    setClientData({ name: '', email: '', phone: '', address: '', userId: [] })
+    setClientData({organisation: '', name: '', email: '', phone: '', gstNo: '', address: '', userId: [] })
   }
     
   const handleClose = () => {
@@ -129,11 +128,19 @@ const AddClient = ({ setOpen, open }) => {
            
 
           <div className="customInputs">
+              <input
+                placeholder="Organisation"
+                style={inputStyle}
+                name='organisation'
+                type='text'
+                onChange={(e) => setClientData({...clientData, organisation: e.target.value})}
+                value={clientData.organisation}
+              />
               <input 
                 placeholder="Name" 
                 style={inputStyle} 
                 name='name' 
-                type='text'  
+                type='text'
                 onChange={(e) => setClientData({...clientData, name: e.target.value})}
                 value={clientData.name} 
               />
@@ -153,6 +160,14 @@ const AddClient = ({ setOpen, open }) => {
                 type='text'  
                 onChange={(e) => setClientData({...clientData, phone: e.target.value})}
                 value={clientData.phone} 
+              />
+              <input
+                placeholder="GST No."
+                style={inputStyle}
+                name='gstNo'
+                type='text'
+                onChange={(e) => setClientData({...clientData, gstNo: e.target.value})}
+                value={clientData.gstNo}
               />
               <input 
                 placeholder="Address" 
